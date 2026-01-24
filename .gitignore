@@ -56,3 +56,16 @@ OK/HIN_EN_PDF_Translator/output_pdfs/
 
 # Logs
 *.log
+
+# LaTeX folders and files
+Shubham Latex Report/
+Shubham Latex Report.zip
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.toc
+*.lof
+*.lot
