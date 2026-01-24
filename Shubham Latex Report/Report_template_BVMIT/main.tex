@@ -1,0 +1,97 @@
+% developed by Suhasini Vijaykumar
+\documentclass[12pt,a4paper,final,oneside]{report}
+
+\usepackage{geometry}
+\usepackage{geometry}
+\geometry{a4paper,total={170mm,257mm}}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphics}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage[pdftex]{hyperref}
+\usepackage{epstopdf}
+\usepackage{setspace}
+\usepackage[numbers]{natbib}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{lipsum}
+\usepackage{setspace}
+\renewcommand{\baselinestretch}{1.5} 
+\usepackage[pdftex]{graphicx}
+\usepackage{sidecap}
+\begin{document}
+
+
+%\thispagestyle{empty}
+
+\input{cover.tex}
+\input{cert.tex}
+\input{declaration.tex}
+\input{companyjoiningletter.tex}
+\input{ack.tex}
+\input{abst.tex}
+% \addcontentsline{toc}{chapter}{Abstract}
+%\clearpage
+\pagenumbering{roman}
+\tableofcontents
+  
+\listoftables
+   \addcontentsline{toc}{chapter}{List of Tables}
+
+
+\listoffigures
+  \addcontentsline{toc}{chapter}{List of Figures}
+
+%\def\abstract{
+ % \chapter*{Abstract}
+  %\addcontentsline{toc}{chapter}{Abstract}
+  %\relax\markboth{ABSTRACT}{ABSTRACT}}
+%\def\endabstract{\par\newpage}
+
+\input{nomenclature.tex}
+\addcontentsline{toc}{chapter}{Nomenclature}
+
+
+\newpage
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%\singlespacing
+\onehalfspacing
+%\doublespacing
+\pagestyle{fancy}
+
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyhf{}
+\rhead{Name of Project}
+\lfoot{BVIMIT}
+\rfoot{Page \thepage}
+
+\input{chap1.tex}
+\input{chap2.tex}
+\input{chap3.tex}
+\input{chap4.tex}
+\input{chap5.tex}
+\input{chap6.tex}
+\input{chap7.tex}
+\input{chap8.tex}
+\input{chap9.tex}
+\input{chap10.tex}
+\input{chap11.tex}
+\input{chap12.tex}
+
+\clearpage
+\phantomsection 
+\addcontentsline{toc}{chapter}{References} \raggedbottom \pagebreak \thispagestyle{empty}
+\renewcommand{\bibname}{References}
+\bibliographystyle{unsrt}
+%\bibliographystyle{IEEEtran}
+\bibliography{database} \raggedbottom \pagebreak \thispagestyle{empty}
+\renewcommand{\bibliography}{\References}
+\nocite{*}
+\addcontentsline{toc}{chapter}{Appendix 1}
+\input{APPENDIX.tex}
+
+\end{document}
+

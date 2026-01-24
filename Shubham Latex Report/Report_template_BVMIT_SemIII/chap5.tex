@@ -1,0 +1,74 @@
+%% refer q31.tex
+
+\chapter{Coding}
+
+\section{Smart Font \& Language Resolution}
+Key logic for selecting the correct font script (Devanagari vs Latin).
+
+\begin{verbatim}
+def resolve_font(logical_name: str, file_path: str) -> Tuple[str, str]:
+    if not file_path or not os.path.exists(file_path):
+        if "Devanagari" in logical_name or "Hindi" in logical_name:
+            return "Nirmala UI", "assets/fonts/Nirmala.ttf"
+        return "Helvetica", "helv"
+    return os.path.basename(file_path).split('.')[0], file_path
+\end{verbatim}
+
+\section{Main Pipeline Execution}
+The orchestration layer routes the document to the correct processor.
+
+\begin{verbatim}
+def run_mode(mode, src, out, orig_index, translate_dir, output_pdf):
+    # 1. Extract style info
+    spans = extract_spans_from_textlayer(src)
+    transfer_color_size_from_original(spans, orig_index)
+
+    # 2. Execute Translation Strategy
+    if mode == "overlay":
+        for it in overlay_items:
+            overlay_draw_text_as_image(out[it['page']], it['bbox'], it['text'])
+            
+    elif mode == "hybrid":
+        for bl in extract_blocks(src):
+            insert_translated_block(out[bl.page], bl, translate_dir)
+
+    # 3. Save
+    out.save(output_pdf)
+\end{verbatim}
+
+\section{Optimized OCR Pipeline}
+Using OCRmyPDF to add text layers to scanned images.
+
+\begin{verbatim}
+def ocr_fix_pdf(input_path: str, lang="eng+hin", dpi=300):
+    output_temp = input_path.replace(".pdf", "_ocr.pdf")
+    cmd = [
+        "ocrmypdf", "--language", lang, "--image-dpi", str(dpi),
+        "--jobs", "4", "--force-ocr", input_path, output_temp
+    ]
+    try:
+        subprocess.run(cmd, check=True)
+        return fitz.open(output_temp)
+    except subprocess.CalledProcessError:
+        return fitz.open(input_path)
+\end{verbatim}
+
+\section{Batch Translation Service}
+Implements batching to respect API rate limits.
+
+\begin{verbatim}
+def batch_translate_texts(texts: List[str], src: str, dest: str):
+    translator = GoogleTranslator(source=src, target=dest)
+    results = []
+    chunk_size = 50
+    
+    for i in range(0, len(texts), chunk_size):
+        batch = texts[i:i+chunk_size]
+        try:
+            results.extend(translator.translate_batch(batch))
+        except:
+            # Fallback: One-by-one
+            for t in batch:
+                results.append(translator.translate(t))
+    return results
+\end{verbatim}

@@ -1,0 +1,43 @@
+\contentsline {chapter}{Abstract}{5}
+\contentsline {chapter}{List of Tables}{8}
+\contentsline {chapter}{List of Figures}{9}
+\contentsline {chapter}{Nomenclature}{10}
+\contentsline {chapter}{\numberline {1}Introduction}{1}
+\contentsline {section}{\numberline {1.1}Project Overview}{1}
+\contentsline {section}{\numberline {1.2}Domain Knowledge}{1}
+\contentsline {section}{\numberline {1.3}Problem Statement}{2}
+\contentsline {chapter}{\numberline {2}System Study}{3}
+\contentsline {section}{\numberline {2.1}Existing System}{3}
+\contentsline {section}{\numberline {2.2}Proposed System: VaaniPath-AI}{3}
+\contentsline {section}{\numberline {2.3}Objectives}{4}
+\contentsline {section}{\numberline {2.4}Feasibility Studies}{4}
+\contentsline {chapter}{\numberline {3}System Analysis}{5}
+\contentsline {section}{\numberline {3.1}Gantt Chart}{5}
+\contentsline {section}{\numberline {3.2}System Diagrams (DFD / Use Case)}{5}
+\contentsline {section}{\numberline {3.3}Operating Tools and Technology}{8}
+\contentsline {subsection}{\numberline {3.3.1}Hardware Requirements}{8}
+\contentsline {subsection}{\numberline {3.3.2}Software Requirements}{8}
+\contentsline {subsection}{\numberline {3.3.3}Technology Overview}{8}
+\contentsline {chapter}{\numberline {4}System Design}{10}
+\contentsline {section}{\numberline {4.1}Entity Relationship (ER) Diagram}{10}
+\contentsline {section}{\numberline {4.2}Activity Diagram}{10}
+\contentsline {section}{\numberline {4.3}Input / Output Design}{11}
+\contentsline {chapter}{\numberline {5}Coding}{13}
+\contentsline {section}{\numberline {5.1}Smart Font \& Language Resolution}{13}
+\contentsline {section}{\numberline {5.2}Main Pipeline Execution}{13}
+\contentsline {section}{\numberline {5.3}Optimized OCR Pipeline}{14}
+\contentsline {section}{\numberline {5.4}Batch Translation Service}{14}
+\contentsline {chapter}{\numberline {6}System Implementation Results}{16}
+\contentsline {section}{\numberline {6.1}Landing Page}{16}
+\contentsline {section}{\numberline {6.2}Upload Interface}{17}
+\contentsline {section}{\numberline {6.3}Processing Pipeline}{17}
+\contentsline {section}{\numberline {6.4}Interactive Comparison Viewer}{18}
+\contentsline {section}{\numberline {6.5}Final Translated Output}{19}
+\contentsline {chapter}{\numberline {7}System Testing}{21}
+\contentsline {section}{\numberline {7.1}Testing Methodologies}{21}
+\contentsline {section}{\numberline {7.2}Test Cases}{21}
+\contentsline {chapter}{\numberline {8}Conclusion and Future Scope}{22}
+\contentsline {section}{\numberline {8.1}Conclusion}{22}
+\contentsline {section}{\numberline {8.2}Limitations}{22}
+\contentsline {section}{\numberline {8.3}Future Enhancements}{22}
+\contentsline {chapter}{References}{23}

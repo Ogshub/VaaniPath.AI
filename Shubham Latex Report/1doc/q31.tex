@@ -1,0 +1,175 @@
+%Latex Template created by Suhasini Vijaykumar 
+\documentclass[12pt,a4paper,final,oneside]{report}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage[pdftex]{hyperref}
+\usepackage{epstopdf}
+
+\begin{document}
+\chapter{Sigma}
+\section{Sigma Filter}
+%%%%%%%%%%%%%
+\subsection{Improved Sigma filter}
+Noise reduction in SAR images is based on multiplicative noise model. These noise models assumes symmetric probability distributions for the SAR image signals which results poor noise removal and edges blurring. Estimates based on these noise models are biased. This bias problem is solved by Lee in improved sigma filter. 
+
+The  algorithm by ~\citep{40leewac}   is an improvement in the lee sigma filter. For the single-look amplitude and intensity SAR data, their probability distribution is far from being symmetric, because they have the Rayleigh and the negative exponential probability density function (pdf), respectively, which produce biased estimation.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.3]{biaspdf.pdf} 
+%\includegraphics[scale=0.6]{flowchart.pdf}
+\caption{Bias problem of the Lee sigma filter.}
+%\caption{Bias problem of the Lee sigma filter~\citep{40leewac}.}
+	\label{biaspdf}
+	
+\end{figure}
+Figure~\ref{biaspdf} illustrate  bias problem using Rayleigh pdf as an example. Figure~\ref{biaspdf}(a) shows original two sigma range shifts the mean value and Figure~\ref{biaspdf}(b) shows the revised sigma range maintain its mean value at one. The Figure~\ref{pdf124} shows that the pdfs are far from being symmetric.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.3]{differentlook.pdf} 
+%\includegraphics[scale=0.6]{flowchart.pdf}'
+\caption{Intensity pdf of one,two,and four look.}
+%\caption{Intensity pdf of one,two,and four look~\citep{40leewac}.}
+	\label{pdf124}
+\end{figure}
+
+Consequently, to remove the bias, the sigma range has to
+be recomputed based on the corresponding distribution
+functions.The sigma ranges for one- to four-look data
+are computed based on theoretical speckle distributions. Pixels
+within these new sigma ranges are then included in the application of the MMSE filter to further retain edges and fine details.
+The two-sigma range of 95.5\% used in the Lee sigma filter
+can be relaxed.  It is adjustable according to the needs
+of particular applications. For general applications such as terrain and crop classification and SAR image interpretation , sigma range of 80\% to 90\% works reasonably well.
+In some applications a value of lower sigma is selected for texture preservation.
+To calculate the new sigma range, a priori mean is important.
+so here  the estimate from MMSE in a   $3\times3$ window is used as a priory mean.
+\par  Preservation of signatures from point targets and man-made
+structures is desirable for image interpretation and other applications.
+ These high-return pixels are generally produced by
+the double-bounce scattering mechanism or by direct specular
+reflection.
+Point targets have to be processed differently from backscattered signatures
+of distributed media. Radar returns from strong targets
+frequently form a cluster of a large number of pixels and that
+the chance of producing such bright and large clusters from
+distributed media, due to the speckle effect, is very slim.
+So to detect the strong scatterers of several pixels in size,
+compute the $98^{th}$ percentile of all pixels of data to be filtered. 
+If the pixel to be filtered has its value greater than $98^{th}$ percentile,
+then  check the number of pixels in a $3\times3$ window greater
+than $98^{th}$ percentile. If the total number is greater than a threshold (five to seven),
+all detected pixels in the $3\times3$ window as point targets,
+and their values will be retained. In other words, they will
+not be filtered. 
+\subsubsection{Summary of the Improved Sigma Filter}
+The step by step processing of the improved sigma filter is shown as a flowchart in Figure~\ref{flowchart}, and its detail is given below
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=1]{flowchart.pdf} 
+%\includegraphics[scale=0.6]{flowchart.pdf}
+\caption{Flowchart of the improved sigma.}
+%\caption{Flowchart of the improved sigma~\citep{40leewac}.}
+	\label{flowchart}
+\end{figure}
+
+\begin{description}
+\item[Step 1)] \textit{Point target detection and preservation:} The 98th percentile $Z_{98}$ of the SAR data is computed. If the
+center pixel $z$ is smaller than $Z_{98}$,the pixels will be
+filtered using the new sigma range in Step 2). Otherwise, we check if the eight immediate neighbouring pixels are greater than $Z_{98}$ . If more than $T_{k}$ pixels (including the center pixel) have values greater than $Z_{98}$, all of them will not be filtered (i.e., their values are retained), and  start processing the next pixel.
+If the number is less than $T_{k}$,then filter the center pixel 
+in Step 2).
+
+\item[Step 2)] \textit{Pixels selection based on the sigma range:}
+The MMSE filter is applied in the $3 \times 3$ window using
+the original $\sigma_{v}$ to compute the estimate of $\tilde{x}$, and
+then the sigma range is established as $(\tilde{x}A1 ,\tilde{x}A2)$. Where $(A1,A2)$ is obtained from Table~\ref{improvedsigma} for the number of looks.
+Pixels are selected from a $9\times9$ or an $11\times11$ window if their values fall within the sigma range.The mean  and variance are computed from the selected pixels.
+
+\item[Step 3)] \textit{MMSE application:} The MMSE filter is used to compute $\tilde{x}$ and new  $\sigma_{v}$ is used from the Table~\ref{improvedsigma}.
+\begin{tabular}{|c|c|}
+	\hline \rule[-2ex]{0pt}{5.5ex} 12 & 122 \\ 
+	\hline \rule[-2ex]{0pt}{5.5ex} 1231231 & 121212 \\ 
+	\hline 
+\end{tabular} 
+\item[Step 4)]\textit{Go back to Step 1) to filter the next pixel:}
+It should be noted that,in Step 1),the center pixel should be
+tested if it is a point target pixel detected during
+the filtering of previous pixels. This is because all
+detected target pixels in a $3 \times 3$ window will not be
+filtered to preserve the target signatures.
+\end{description}
+
+
+\begin{table}[h]
+\centering
+\caption{Revised Sigma Ranges for 4-look amplitude SAR data}
+\label{improvedsigma}
+\vspace{1ex}
+\begin{tabular}{|c|c|c|c|c|}
+\hline Sigma & $A_{1}$ & $A_{2}$ & $A_{2}-A_{1}$ & new $\sigma_{v}$ \\ 
+\hline 0.50 & 0.832 & 1.179 & 0.347 & 0.0894192 \\ 
+\hline 0.60 & 0.793 & 1.226 & 0.433 & 0.112018 \\ 
+\hline 0.70 & 0.747 & 1.279 & 0.532 & 0.139243 \\ 
+\hline 0.80 & 0.691 & 1.347 & 0.656 & 0.167771 \\ 
+\hline 0.90 & 0.613 & 1.452 & 0.839 & 0.201036 \\ 
+\hline 0.95 & 0.548 & 1.543 & 0.995 & 0.222048 \\ 
+\hline 
+\end{tabular} 
+\end{table}
+
+\setcounter{secnumdepth}{5} % seting level of numbering (default for "report" is 3). With ''-1'' you have non number also for chapters
+%\setcounter{tocdepth}{5} % if you want all the levels in your table of contents
+
+	\chapter{chapter title (depth 0)}
+	\section{section title (depth 1)}
+	\subsection{subsection title (depth 2)}
+	\subsubsection{subsubsection title (depth 3)}
+	\paragraph{paragraph title (depth 4)}
+	\subparagraph{Subparagraph title (depth 5)} % last existing level
+
+
+
+
+\begin{description}
+	\item Moodle is a software package for producing Internet-based courses and web sites. \item It is a global development project designed to support a social constructionist framework of education
+	\item Moodle is provided freely as Open Source software (under the GNU Public License). 
+	\item You are allowed to copy, use and modify Moodle provided that you agree to: provide the source to others; not modify or remove the original license and copyrights, and apply this same license to any derivative work. 
+	\item Moodle can be installed on any computer that can run PHP, and can support an SQL type database (for example MySQL).
+	\item  It can be run on Windows and Mac operating systems and many avors of linux (for example Red Hat or Debian GNU). 
+	\item  It can be run on Windows and Mac operating systems and many avors of linux (for example Red Hat or Debian GNU). 
+	\item The word Moodle was originally an acronym for Modular Object-Oriented Dynamic Learning Environment, which is mostly useful to programmers and education theorists.
+\end{description}
+
+\begin{itemize}
+	\item Moodle is a software package for producing Internet-based courses and web sites. \item It is a global development project designed to support a social constructionist framework of education
+	\item Moodle is provided freely as Open Source software (under the GNU Public License). 
+	\item You are allowed to copy, use and modify Moodle provided that you agree to: provide the source to others; not modify or remove the original license and copyrights, and apply this same license to any derivative work. 
+	\item Moodle can be installed on any computer that can run PHP, and can support an SQL type database (for example MySQL).
+	\item  It can be run on Windows and Mac operating systems and many avors of linux (for example Red Hat or Debian GNU). 
+	\item  It can be run on Windows and Mac operating systems and many avors of linux (for example Red Hat or Debian GNU). 
+	\item The word Moodle was originally an acronym for Modular Object-Oriented Dynamic Learning Environment, which is mostly useful to programmers and education theorists.
+\end{itemize}
+
+
+\begin{enumerate}
+	\item Moodle is a software package for producing Internet-based courses and web sites. \item It is a global development project designed to support a social constructionist framework of education
+	\item Moodle is provided freely as Open Source software (under the GNU Public License). 
+	\item You are allowed to copy, use and modify Moodle provided that you agree to: provide the source to others; not modify or remove the original license and copyrights, and apply this same license to any derivative work. 
+	\item Moodle can be installed on any computer that can run PHP, and can support an SQL type database (for example MySQL).
+	\item  It can be run on Windows and Mac operating systems and many avors of linux (for example Red Hat or Debian GNU). 
+	\item  It can be run on Windows and Mac operating systems and many avors of linux (for example Red Hat or Debian GNU). 
+	\item The word Moodle was originally an acronym for Modular Object-Oriented Dynamic Learning Environment, which is mostly useful to programmers and education theorists.
+\end{enumerate}
+
+Let \( \mathcal{T} \) be a topological space, a basis is defined as
+\[
+\mathcal{B} = \{B_{\alpha} \in \mathcal{T}\, |\,  U = \bigcup B_{\alpha} \forall U \in \mathcal{T} \}
+\]
+\end{document}

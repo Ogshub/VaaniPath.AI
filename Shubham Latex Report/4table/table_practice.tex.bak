@@ -1,0 +1,36 @@
+%Latex Template created by Sanjay Shitole
+
+\documentclass[12pt,a4paper,final,twoside]{report}
+
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage[pdftex]{hyperref}
+\usepackage{epstopdf}
+
+\begin{document}
+
+
+\begin{table}[h]
+\caption{Classification accuracy improvement for ALOS-1-PALSAR  Mumbai}
+\label{tab:ALOSPALSAR_mum_class}
+\resizebox{\columnwidth}{!}{
+\centering
+\begin{tabular}{cccccc}
+\hline Class  & No filter & Boxcar & Improved Sigma & IDAN & Proposed filter \\ 
+\hline Settelment  & 82.00 & 99.82& 98.43 & 92.23& 91.80\\ 
+ Water & 98.81& 100.00 & 100.00 & 100.00& 100.00\\ 
+ Forest & 81.23 & 98.28 & 99.27 & 96.49 & 96.69 \\ 
+Mangroves & 69.30 & 99.71 & 100.00 & 99.57 & 98.92 \\ 
+ Bare Soil & 81.86 & 100.00 & 100.00 & 99.64 & 99.29 \\ 
+\hline 
+\end{tabular} 
+}
+\end{table}
+
+\end{document}
+

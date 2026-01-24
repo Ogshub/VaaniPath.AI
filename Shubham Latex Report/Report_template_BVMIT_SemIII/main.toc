@@ -1,0 +1,47 @@
+\contentsline {chapter}{Abstract}{5}
+\contentsline {chapter}{List of Tables}{8}
+\contentsline {chapter}{List of Figures}{9}
+\contentsline {chapter}{Nomenclature}{10}
+\contentsline {chapter}{\numberline {1}Introduction}{1}
+\contentsline {section}{\numberline {1.1}Introduction to Project}{1}
+\contentsline {section}{\numberline {1.2}Domain Knowledge}{1}
+\contentsline {section}{\numberline {1.3}Problem Description}{2}
+\contentsline {chapter}{\numberline {2}System Study}{3}
+\contentsline {section}{\numberline {2.1}Existing System}{3}
+\contentsline {section}{\numberline {2.2}Proposed System: VaaniPath-AI}{4}
+\contentsline {section}{\numberline {2.3}Objectives}{5}
+\contentsline {section}{\numberline {2.4}Feasibility Studies}{5}
+\contentsline {subsection}{\numberline {2.4.1}Technical Feasibility}{5}
+\contentsline {subsection}{\numberline {2.4.2}Economical Feasibility}{5}
+\contentsline {subsection}{\numberline {2.4.3}Operational Feasibility}{5}
+\contentsline {chapter}{\numberline {3}System Analysis}{6}
+\contentsline {section}{\numberline {3.1}Gantt Chart}{6}
+\contentsline {section}{\numberline {3.2}System Diagrams (DFD / Use Case)}{6}
+\contentsline {section}{\numberline {3.3}Operating Tools and Technology}{9}
+\contentsline {subsection}{\numberline {3.3.1}Hardware Requirements}{9}
+\contentsline {subsection}{\numberline {3.3.2}Software Requirements}{9}
+\contentsline {subsection}{\numberline {3.3.3}Technology Overview}{9}
+\contentsline {chapter}{\numberline {4}System Design}{10}
+\contentsline {section}{\numberline {4.1}Entity Relationship (ER) Diagram}{10}
+\contentsline {section}{\numberline {4.2}Data Structure Design}{11}
+\contentsline {section}{\numberline {4.3}Class Diagram / Activity Diagram}{11}
+\contentsline {section}{\numberline {4.4}Input / Output Design}{12}
+\contentsline {chapter}{\numberline {5}Coding}{14}
+\contentsline {section}{\numberline {5.1}Smart Font & Language Resolution}{14}
+\contentsline {section}{\numberline {5.2}Main Pipeline Execution}{15}
+\contentsline {section}{\numberline {5.3}Optimized OCR Pipeline}{16}
+\contentsline {section}{\numberline {5.4}Batch Translation Service}{17}
+\contentsline {chapter}{\numberline {6}System Implementation Results}{18}
+\contentsline {section}{\numberline {6.1}Landing Page}{18}
+\contentsline {section}{\numberline {6.2}Upload Interface}{18}
+\contentsline {section}{\numberline {6.3}Processing Pipeline}{19}
+\contentsline {section}{\numberline {6.4}Interactive Comparison Viewer}{20}
+\contentsline {section}{\numberline {6.5}Final Translated Output}{21}
+\contentsline {chapter}{\numberline {7}System Testing}{23}
+\contentsline {section}{\numberline {7.1}Testing Methodologies}{23}
+\contentsline {section}{\numberline {7.2}Test Cases}{23}
+\contentsline {chapter}{\numberline {8}Conclusion and Future Scope}{25}
+\contentsline {section}{\numberline {8.1}Conclusion}{25}
+\contentsline {section}{\numberline {8.2}Limitations}{25}
+\contentsline {section}{\numberline {8.3}Future Enhancements}{26}
+\contentsline {chapter}{References}{27}

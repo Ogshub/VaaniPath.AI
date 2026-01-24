@@ -1,0 +1,51 @@
+%Latex Template created by Suhasini Vijaykumar 
+% Run as below
+%bulid: pdflatex
+%bibtex
+%bulid: pdflatex
+%bulid: pdflatex
+
+\documentclass[12pt,a4paper,final,twoside]{report}
+
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{epstopdf}
+%\usepackage{harvard}
+\usepackage[square,sort,comma,numbers]{natbib}
+
+
+%\usepackage[
+%backend=biber,
+%style=alphabetic,
+%citestyle=authoryear 
+%]{biblatex}
+
+
+\begin{document}
+
+\begin{center}
+\textbf{Study of Bibtex}
+\end{center}
+
+By performing simultaneous gray level range compression and contrast enhancement on illumination reflection model, one can improve the appearance of an image by designing a frequency domain procedure ~\cite{man87}.
+An image $f(x,y)$ can be expressed as a product of illumination and reflection components ~\cite{sam09}.
+This is ~\cite{sss}.
+The microwave imaging is an important field ~\cite{ppp}.
+
+
+\renewcommand{\bibname}{References}
+%This style is useful for harvard package
+%\bibliographystyle{ifac}
+
+\bibliographystyle{ieeetran}
+\nocite{*}
+\bibliography{database}
+\renewcommand{\bibliography}{\References}
+
+\end{document}
+

@@ -1,0 +1,29 @@
+%Latex Template created by Sanjay Shitole
+
+\documentclass[12pt,a4paper,final,oneside]{report}
+
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage[pdftex]{hyperref}
+\usepackage{epstopdf}
+
+\begin{document}
+
+\[ 
+\textrm{\textbf{Stage I}}     \left\{  
+\begin{array}{cc}
+ &  \\ 
+ &   \\
+   &  \\
+    &
+ 
+\end{array} 
+\right.  \]
+
+\end{document}
+
