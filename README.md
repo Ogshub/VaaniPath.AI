@@ -23,7 +23,7 @@ A full-stack web application that translates PDFs between Hindi and English whil
 
 ![Demo GIF](demo.gif)
 
-**Live Demo:** [Coming Soon]
+**Live Demo:** [View on LinkedIn](https://www.linkedin.com/posts/ogshub_fastapi-python-supabase-activity-7420869943497457664-2K1f)
 
 ## 🛠️ Tech Stack
 
