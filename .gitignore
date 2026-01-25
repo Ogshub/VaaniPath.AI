@@ -69,3 +69,9 @@ Shubham Latex Report.zip
 *.toc
 *.lof
 *.lot
+
+# Documentation files (keep local only)
+SESSION_SUMMARY.md
+QUICK_REFERENCE.md
+SYSTEM_DESIGN_SPECIFICATIONS.md
+
