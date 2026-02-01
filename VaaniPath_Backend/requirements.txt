@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+python-multipart
+pymupdf
+pillow
+ocrmypdf
+deep-translator
+supabase
+pdf2image
+nest_asyncio
+anyio
+pathlib

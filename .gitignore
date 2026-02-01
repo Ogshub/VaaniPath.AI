@@ -4,32 +4,12 @@ __pycache__/
 *$py.class
 *.so
 .Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
 venv/
-ENV/
 env/
+.venv/
 
 # Node
 node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnp/
-.pnp.js
 dist/
 build/
 
@@ -38,42 +18,32 @@ build/
 .idea/
 *.swp
 *.swo
-*~
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Project specific
-OK/HIN_EN_PDF_Translator/temp_uploads/
-OK/HIN_EN_PDF_Translator/uploads/
-OK/HIN_EN_PDF_Translator/output_pdfs/
-OK/HIN_EN_PDF_Translator/temp/
+# --- IGNORE OTHER FOLDERS FOR PUSH ---
+# These remain on your computer but won't be pushed to GitHub
+R/
+Trash/
+diagrams/
+"Shubham Latex Report"/
+temp/
+OK/
+
+# --- PROJECT FILES (tracked) ---
+# VaaniPath_Backend/
+# FrontendPDF/
+# tessdata/
+# .gitignore
+
+# Backend specific ignores (nested)
+VaaniPath_Backend/temp_uploads/
+VaaniPath_Backend/uploads/
+VaaniPath_Backend/output_pdfs/
+VaaniPath_Backend/temp/
+VaaniPath_Backend/venv/
+
 *.pdf
-!OK/HIN_EN_PDF_Translator/sample_pdfs/*.pdf
-
-# Environment variables
-.env
-.env.local
-
-# Logs
-*.log
-
-# LaTeX folders and files
-Shubham Latex Report/
-Shubham Latex Report.zip
-*.aux
-*.bbl
-*.blg
-*.fdb_latexmk
-*.fls
-*.synctex.gz
-*.toc
-*.lof
-*.lot
-
-# Documentation files (keep local only)
-SESSION_SUMMARY.md
-QUICK_REFERENCE.md
-SYSTEM_DESIGN_SPECIFICATIONS.md
-
+!VaaniPath_Backend/sample_pdfs/*.pdf
