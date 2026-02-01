@@ -34,10 +34,10 @@ SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
 supabase: Client = None
 try:
     supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
-    print("✅ Supabase Client Initialized")
+    print("Supabase Client Initialized")
 except Exception as e:
-    print(f"⚠️  Supabase Connection Failed: {e}")
-    print("⚠️  Running in Offline Mode. Files will be saved locally.")
+    print(f"Supabase Connection Failed: {e}")
+    print("Running in Offline Mode. Files will be saved locally.")
 
 app = FastAPI()
 
@@ -61,7 +61,7 @@ UPLOADS_DIR.mkdir(exist_ok=True)
 # Set TESSDATA_PREFIX to local folder if exists
 if Path("tessdata").exists():
     os.environ["TESSDATA_PREFIX"] = str(Path("tessdata").absolute())
-    print(f"📡 TESSDATA_PREFIX set to: {os.environ['TESSDATA_PREFIX']}")
+    print(f"TESSDATA_PREFIX set to: {os.environ['TESSDATA_PREFIX']}")
 
 # Mount Output Directory for Local Downloads
 app.mount("/downloads", StaticFiles(directory=str(OUTPUT_DIR)), name="downloads")
@@ -82,7 +82,7 @@ def process_pdf_task(job_id: str, file_path: str, mode: str, translate_dir: str)
         jobs[job_id]['status'] = 'processing'
         jobs[job_id]['step'] = 'Initializing...'
         jobs[job_id]['progress'] = 5
-        print(f"🚀 TASK STARTED: {job_id}")
+        print(f"TASK STARTED: {job_id}")
         
         # Unique work folder for this job
         work_folder = Path(f"uploads/work_{job_id}")
@@ -144,22 +144,22 @@ def process_pdf_task(job_id: str, file_path: str, mode: str, translate_dir: str)
         if supabase:
             try:
                 jobs[job_id]['step'] = 'Uploading to Cloud...'
-                print(f"📡 TASK: Uploading {final_filename} to Supabase...")
+                print(f"TASK: Uploading {final_filename} to Supabase...")
                 with open(local_final_path, 'rb') as f:
                     supabase.storage.from_('pdfs').upload(final_filename, f, {"content-type": "application/pdf"})
                 
                 # Get public URL
                 res = supabase.storage.from_('pdfs').get_public_url(final_filename)
                 public_url = res if isinstance(res, str) else res.get('publicURL') or res.get('publicUrl')
-                print(f"✅ TASK: Upload success. URL: {public_url}")
+                print(f"TASK: Upload success. URL: {public_url}")
             except Exception as e:
-                print(f"⚠️ TASK: Cloud upload failed: {e}")
+                print(f"TASK: Cloud upload failed: {e}")
 
         jobs[job_id]['status'] = 'done'
         jobs[job_id]['progress'] = 100
         jobs[job_id]['step'] = 'Finished'
         jobs[job_id]['result_url'] = public_url
-        print(f"🎉 TASK COMPLETED: {job_id}")
+        print(f"TASK COMPLETED: {job_id}")
 
     except Exception as e:
         print(f"Processing failed: {e}")
