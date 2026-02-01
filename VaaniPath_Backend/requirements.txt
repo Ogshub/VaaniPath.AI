@@ -5,6 +5,7 @@ pymupdf
 pillow
 ocrmypdf
 deep-translator
+googletrans==4.0.0-rc1
 supabase
 pdf2image
 nest_asyncio
