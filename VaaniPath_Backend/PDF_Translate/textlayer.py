@@ -181,3 +181,25 @@ def derive_block_styles_from_spans(blocks: List[Block], spans: List[Span]) -> No
         color_counts: Dict[Tuple[float, ...], int] = {}
         for sp in sps: color_counts[sp.color] = color_counts.get(sp.color, 0) + 1
         bl.color = max(color_counts.items(), key=lambda kv: kv[1])[0]
+
+def map_block_styles_from_spans(blocks: List[Any], spans: List[Span]) -> None:
+    spans_by_page: Dict[int, List[Span]] = {}
+    for sp in spans:
+        spans_by_page.setdefault(sp.page, []).append(sp)
+
+    for bl in blocks:
+        # Check for intersection with any span on this page
+        sps = [sp for sp in spans_by_page.get(bl.page, [])
+               if (max(0.0, min(bl.rect[2], sp.rect[2]) - max(bl.rect[0], sp.rect[0])) *
+                   max(0.0, min(bl.rect[3], sp.rect[3]) - max(bl.rect[1], sp.rect[1]))) > 0]
+        if not sps: 
+            continue
+        sizes = [sp.fontsize for sp in sps]
+        try:
+            bl.fontsize = statistics.median(sizes)
+        except statistics.StatisticsError:
+            bl.fontsize = sizes[0]
+        color_counts: Dict[Tuple[float, ...], int] = {}
+        for sp in sps:
+            color_counts[sp.color] = color_counts.get(sp.color, 0) + 1
+        bl.color = max(color_counts.items(), key=lambda kv: kv[1])[0]
