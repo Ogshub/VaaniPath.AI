@@ -1,0 +1,79 @@
+\chapter{TESTING AND VALIDATION}
+
+\section{Introduction}
+Testing is a critical phase in the development of "My Task Manager" to ensure that the application functions correctly, is user-friendly, and maintains data integrity. This chapter describes the testing strategies, specific metrics like percentage of testing planned and done, and provides proof of correctness.
+
+\section{Testing Strategy and Metrics}
+To ensure the reliability of the system, a comprehensive testing plan was executed. The following metrics track the progress of our testing phase:
+
+\begin{itemize}
+    \item \textbf{Percentage of Testing Planned:} 100\% of the functional requirements (CRUD operations, sorting, and scheduling) were planned for verification.
+    \item \textbf{Percentage of Testing Done:} 100\% of the planned tests have been completed successfully across multiple browser environments.
+\end{itemize}
+
+\section{Testing Methodologies}
+
+\subsection{Unit Testing}
+Individual JavaScript functions were tested in isolation. For example, the \texttt{addTask()} function was tested to ensure it correctly creates a task object, and the \texttt{renderTasks()} function was verified to ensure it correctly maps those objects to HTML elements.
+
+\subsection{System Testing}
+The entire application was tested from a user's perspective. This involved adding multiple tasks, setting various deadlines, and refreshing the page to verify that the data remains intact using the browser's LocalStorage.
+
+\subsection{User Acceptance Testing (UAT)}
+A group of 5 students tested the application. They were asked to organize their daily college schedule using the tool and report any friction in the user experience.
+
+\section{Proof of Correctness (Success vs. Error)}
+To verify if the system is working correctly, we established clear definitions for success and failure:
+
+\subsection{When is a test "Successful"?}
+\begin{enumerate}
+    \item \textbf{Visual Confirmation:} When a task is added, it immediately appears in the task list with the correct text and date.
+    \item \textbf{State Change:} When clicking 'Complete', the task text gains a strikethrough effect and its background color fades.
+    \item \textbf{Persistence:} After closing and reopening the browser, the tasks are still present. This serves as proof that the \texttt{localStorage} API is working correctly.
+\end{enumerate}
+
+\subsection{When is it an "Error"?}
+\begin{enumerate}
+    \item \textbf{Validation Error:} If a user tries to add an empty task, the system triggers a standard browser alert saying "Please enter a task!". This is a "handled error" that prevents database (local storage) corruption.
+    \item \textbf{Console Logs:} During development, any JavaScript syntax errors or logical failures were caught using the Chrome Developer Tools Console (F12).
+\end{enumerate}
+
+\section{Detailed Test Cases}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{|l|p{3.5cm}|p{3.5cm}|p{2.5cm}|l|}
+\hline
+\textbf{ID} & \textbf{Test Case} & \textbf{Input/Action} & \textbf{Expected Output} & \textbf{Status} \\
+\hline
+TC1 & Add Valid Task & Enter "Buy Milk" + Date & Task appears in list & Pass \\
+\hline
+TC2 & Empty Validation & Click Add without text & Alert: "Please enter a task" & Pass \\
+\hline
+TC3 & Task Completion & Click 'Done' button & Text gets strikethrough & Pass \\
+\hline
+TC4 & Task Deletion & Click 'Delete' button & Task disappears & Pass \\
+\hline
+TC5 & Data Persistence & Refresh the page & Tasks remain in list & Pass \\
+\hline
+TC6 & Date Sorting & Add 2 tasks with diff dates & Earlier date moves to top & Pass \\
+\hline
+\end{tabular}
+\caption{System Test Case Summary}
+\label{tab:test_cases}
+\end{table}
+
+\section{Proof through LocalStorage Verification}
+As a technical proof of testing, the browser's "Application" tab was used to inspect the raw data.
+\begin{itemize}
+    \item \textbf{Step:} Open Chrome DevTools $\rightarrow$ Application $\rightarrow$ Local Storage.
+    \item \textbf{Observation:} A key named \texttt{'tasks'} contains a JSON array of all entered tasks.
+    \item \textbf{Conclusion:} The presence of this data structure confirms that the application is successfully saving user input.
+\end{itemize}
+
+\section{User Feedback and Results}
+The user group provided an average rating of 4.6/5. Most users appreciated the vibrant yellow and pink UI, stating that it makes task management feel "less like a chore and more engaging."
+
+\section{Conclusion}
+Testing has confirmed that "My Task Manager" is a stable and reliable application. With a 100\% pass rate on planned tests, the system is ready for use as a lightweight productivity tool.

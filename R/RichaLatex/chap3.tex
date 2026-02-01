@@ -1,0 +1,89 @@
+\chapter{SYSTEM REQUIREMENTS SPECIFICATION}
+
+\section{Introduction}
+This chapter defines the functional and non-functional requirements for the My Task Manager application.
+
+\section{Functional Requirements}
+
+\subsection{Task Management}
+\textbf{FR1: Add Task} - Allow users to create tasks with text description and optional date/time.
+
+\textbf{FR2: View Tasks} - Display all tasks in organized, sorted list format.
+
+\textbf{FR3: Complete Task} - Mark tasks as complete with visual feedback (strikethrough, reduced opacity).
+
+\textbf{FR4: Delete Task} - Permanently remove tasks from the list.
+
+\subsection{Task Organization}
+\textbf{FR5: Automatic Sorting} - Sort tasks by completion status first, then by due date (earliest first).
+
+\subsection{Data Persistence}
+\textbf{FR8: Save Tasks} - Automatically save all tasks to localStorage after modifications.
+
+\textbf{FR9: Load Tasks} - Retrieve saved tasks on application start.
+
+\subsection{User Interface}
+\textbf{FR10: Input Validation} - Validate that task text is not empty before creating tasks.
+
+\textbf{FR11: Visual Feedback} - Provide clear visual indicators for task status.
+
+\section{Non-Functional Requirements}
+
+\subsection{Performance}
+\textbf{NFR1: Response Time} - All operations complete within 100ms under normal conditions.
+
+\textbf{NFR2: Storage Efficiency} - Support at least 1000 tasks within localStorage limits.
+
+\textbf{NFR3: Scalability} - Maintain performance with up to 500 active tasks.
+
+\subsection{Usability}
+\textbf{NFR4: Ease of Use} - Usable without training; new users can add first task within 30 seconds.
+
+\textbf{NFR5: Visual Design} - Attractive, modern interface with clear visual hierarchy.
+
+\subsection{Reliability}
+\textbf{NFR6: Data Integrity} - Maintain data integrity, preventing loss or corruption.
+
+\textbf{NFR7: Error Handling} - Handle errors gracefully without crashing.
+
+\subsection{Compatibility}
+\textbf{NFR8: Browser Compatibility} - Function correctly on Chrome, Firefox, Edge, and Safari (version 90+).
+
+\subsection{Security and Privacy}
+\textbf{NFR9: Data Privacy} - Keep all user data local to device with no external requests.
+
+\textbf{NFR10: Input Sanitization} - Sanitize user input to prevent security issues.
+
+\subsection{Maintainability}
+\textbf{NFR11: Code Quality} - Follow JavaScript best practices with clear documentation.
+
+\section{System Constraints}
+\begin{itemize}
+\item Browser dependency (requires modern browser with localStorage)
+\item Storage limit (constrained by browser localStorage, typically 5-10 MB)
+\item Single device only (no synchronization)
+\item JavaScript required
+\item No backend infrastructure
+\end{itemize}
+
+\section{Hardware and Software Requirements}
+
+\subsection{Minimum Requirements}
+\begin{itemize}
+\item Processor: 1 GHz or faster
+\item RAM: 2 GB
+\item Storage: 10 MB free space
+\item Display: 1024x768 resolution
+\item Browser: Chrome 90+, Firefox 88+, Edge 90+, or Safari 14+
+\end{itemize}
+
+\section{Use Case Scenarios}
+
+\subsection{Use Case 1: Adding a Task}
+User enters task text, optionally selects date/time, clicks Add Task. System validates, creates task, saves to localStorage, and displays in list.
+
+\subsection{Use Case 2: Completing a Task}
+User clicks Complete button. System toggles status, updates storage, re-renders list with visual changes (strikethrough, moved to bottom).
+
+\section{Conclusion}
+This chapter defined comprehensive requirements for the My Task Manager application, serving as the foundation for system design and implementation.

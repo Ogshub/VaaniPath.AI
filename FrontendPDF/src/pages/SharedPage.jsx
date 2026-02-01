@@ -3,6 +3,7 @@ import { Download, FileText, Share2, Copy, Check } from 'lucide-react';
 import { useParams } from 'react-router-dom';
 
 import { supabase } from '../utils/supabaseClient';
+import API_BASE_URL from '../apiConfig';
 
 const SharedPage = () => {
   const { id } = useParams(); // id is filename here for now
@@ -35,7 +36,7 @@ const SharedPage = () => {
           // Fallback to local
           setFileData({
               name: filename,
-              url: `http://localhost:8000/downloads/${filename}`,
+              url: `${API_BASE_URL}/downloads/${filename}`,
               size: "Unknown",
               lang: "Detected",
               date: new Date().toLocaleDateString()

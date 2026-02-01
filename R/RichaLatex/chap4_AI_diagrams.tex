@@ -1,0 +1,161 @@
+\chapter{SYSTEM DESIGN}
+
+\section{Introduction}
+System design transforms requirements into a blueprint for implementation. This chapter presents the architectural design, data structures, and diagrams illustrating the My Task Manager application's structure and behavior.
+
+\section{System Architecture}
+
+\subsection{Client-Side Architecture}
+The application follows a pure client-side architecture with three logical layers:
+
+\textbf{Presentation Layer (HTML + CSS):} User interface and visual presentation
+
+\textbf{Business Logic Layer (JavaScript):} Core functionality including task management, sorting, and alarm checking
+
+\textbf{Data Layer (localStorage):} Data persistence using browser storage
+
+\section{Data Design}
+
+\subsection{Task Object Structure}
+Each task is represented as:
+\begin{verbatim}
+{
+    text: "Task description",
+    dateTime: "2026-01-31T14:00" or null,
+    completed: false,
+    alerted: false
+}
+\end{verbatim}
+
+\subsection{localStorage Schema}
+\textbf{Key:} 'tasks'
+
+\textbf{Value:} JSON array of task objects
+
+\section{Entity-Relationship Diagram}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{er-diagram.png}
+\caption{Entity-Relationship Diagram}
+\end{figure}
+
+The ER diagram shows the USER entity storing multiple TASK entities in a 1:N relationship.
+
+\section{Data Flow Diagrams}
+
+\subsection{DFD Level 0}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{dfd0.png}
+\caption{Data Flow Diagram - Level 0}
+\end{figure}
+
+The context diagram shows the user interacting with the Task Manager system, which stores data in localStorage.
+
+\subsection{DFD Level 1}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{dfd1.png}
+\caption{Data Flow Diagram - Level 1}
+\end{figure}
+
+The Level 1 DFD shows six processes: Add Task, Display Tasks, Toggle Status, Delete Task, Check Alarms, and Sort Tasks.
+
+\section{Use Case Diagram}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{usecase.png}
+\caption{Use Case Diagram}
+\end{figure}
+
+The use case diagram depicts user interactions: Add Task, View Tasks, Mark Complete, Undo Completion, Delete Task, Set Date/Time, and Receive Alerts.
+
+\section{Activity Diagram}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{activity-diagram.png}
+\caption{Activity Diagram}
+\end{figure}
+
+The activity diagram illustrates the workflow from application start through task management operations.
+
+\section{Class Diagram}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{class-diagram.png}
+\caption{Class Diagram}
+\end{figure}
+
+The class diagram shows four main classes: Task, TaskManager, AlarmService, and LocalStorageService.
+
+\section{User Interface Design}
+
+\subsection{Interface Layout}
+\begin{itemize}
+\item Header: Application title with emoji icon
+\item Input Section: Text input, date picker, time picker, Add button
+\item Task List: Vertical list of tasks with action buttons
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{ui-screenshot.png}
+\caption{User Interface Screenshot}
+\end{figure}
+
+\subsection{Color Scheme}
+\begin{itemize}
+\item Background: Yellow (\#e6d75e) with star pattern
+\item Container: Pink/Magenta (\#b9166d)
+\item Task Items: Light gray (\#e9ecef)
+\item Buttons: Orange (Add), Green (Complete), Red (Delete)
+\end{itemize}
+
+\section{Algorithm Design}
+
+\subsection{Task Sorting Algorithm}
+Tasks are sorted by completion status first, then by due date:
+\begin{itemize}
+\item Incomplete tasks before completed tasks
+\item Within each group, earliest due date first
+\item Tasks without dates treated as infinite future
+\end{itemize}
+
+\textbf{Time Complexity:} O(n log n)
+
+\subsection{Alarm Checking Algorithm}
+The system checks for overdue tasks every second:
+\begin{itemize}
+\item Compare current time with task due time
+\item Display alert for overdue incomplete tasks
+\item Mark as alerted to prevent duplicates
+\end{itemize}
+
+\textbf{Time Complexity:} O(n) per check
+
+\section{Project Timeline}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{gantt-chart.png}
+\caption{Project Gantt Chart}
+\end{figure}
+
+The Gantt chart shows the 6-week project timeline covering planning, development, testing, and deployment phases.
+
+\section{Security Considerations}
+\begin{itemize}
+\item Input validation prevents empty tasks
+\item Data sanitization prevents XSS attacks
+\item All data remains on user's device
+\item No external network requests
+\end{itemize}
+
+\section{Conclusion}
+This chapter presented the comprehensive system design for My Task Manager, including architecture, data structures, and multiple diagram perspectives. This design serves as the blueprint for implementation.

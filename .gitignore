@@ -45,8 +45,10 @@ build/
 Thumbs.db
 
 # Project specific
-OK/HIN_EN_PDF_Translator/temp_pdfs/
+OK/HIN_EN_PDF_Translator/temp_uploads/
+OK/HIN_EN_PDF_Translator/uploads/
 OK/HIN_EN_PDF_Translator/output_pdfs/
+OK/HIN_EN_PDF_Translator/temp/
 *.pdf
 !OK/HIN_EN_PDF_Translator/sample_pdfs/*.pdf
 

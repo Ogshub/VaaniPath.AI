@@ -1,0 +1,195 @@
+\chapter{IMPLEMENTATION}
+
+\section{Introduction}
+This chapter discusses the development process, code structure, and key implementation details of the My Task Manager application.
+
+\section{Development Environment}
+\textbf{Tools:} Visual Studio Code, Google Chrome Developer Tools
+
+\textbf{Technologies:} HTML5, CSS3, JavaScript ES6+
+
+\section{File Structure}
+\begin{verbatim}
+todolist-project/
+├── index.html
+├── style.css
+└── script.js
+\end{verbatim}
+
+\section{HTML Implementation}
+The HTML provides the structural foundation with form inputs for task creation and a container for the dynamic task list.
+
+\section{CSS Implementation}
+CSS3 creates an attractive interface with Flexbox layout, SVG background pattern with star emojis, smooth transitions, and color-coded buttons.
+
+\section{JavaScript Implementation}
+
+\subsection{Global Variables and Initialization}
+\begin{verbatim}
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+const taskList = document.getElementById('taskList');
+\end{verbatim}
+
+The tasks array is loaded from localStorage on initialization, defaulting to an empty array if no saved data exists.
+
+\subsection{Add Task Function}
+\begin{verbatim}
+function addTask() {
+    const text = document.getElementById('taskInput').value.trim();
+    const date = document.getElementById('dateInput').value;
+    const time = document.getElementById('timeInput').value;
+    
+    if (!text) {
+        alert("Please enter a task.");
+        return;
+    }
+
+    let dateTime = null;
+    
+    // Only set dateTime if both date and time are provided
+    if (date && time) {
+        dateTime = `${date}T${time}`;
+    }
+
+    tasks.push({ text, dateTime, completed: false });
+    
+    // Save to localStorage
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+
+    // Clear inputs
+    document.getElementById('taskInput').value = '';
+    document.getElementById('dateInput').value = '';
+    document.getElementById('timeInput').value = '';
+
+    renderTasks();
+}
+\end{verbatim}
+
+This function validates input, creates a task object with optional date/time, saves to localStorage, and re-renders the list.
+
+\subsection{Render Tasks Function}
+\begin{verbatim}
+function renderTasks() {
+    taskList.innerHTML = ''; 
+
+    // Sort: Completed tasks to bottom, then by date
+    tasks.sort((a, b) => {
+        if (a.completed !== b.completed) {
+            return a.completed ? 1 : -1;
+        }
+        const dateA = a.dateTime ? new Date(a.dateTime) : Infinity;
+        const dateB = b.dateTime ? new Date(b.dateTime) : Infinity;
+        return dateA - dateB;
+    });
+
+    tasks.forEach((task, index) => {
+        const listItem = document.createElement('li');
+        listItem.className = task.completed ? 'completed' : '';
+
+        // Create task details with formatted date
+        const taskDetails = document.createElement('span');
+        let formattedDate = '';
+        
+        if (task.dateTime) {
+            formattedDate = new Date(task.dateTime).toLocaleString();
+        }
+
+        taskDetails.innerHTML = `
+            <strong>${task.text}</strong> 
+            ${formattedDate ? `<br><small>Due: ${formattedDate}</small>` : ''} 
+        `;
+        
+        listItem.appendChild(taskDetails);
+        
+        // Create action buttons
+        const actions = document.createElement('div');
+        
+        const completeBtn = document.createElement('button');
+        completeBtn.textContent = task.completed ? 'Undo' : 'Complete';
+        completeBtn.style.backgroundColor = 
+            task.completed ? '#f0ad4e' : '#5cb85c';
+        completeBtn.onclick = () => toggleComplete(index);
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.style.backgroundColor = '#d9534f';
+        deleteBtn.onclick = () => deleteTask(index);
+
+        actions.appendChild(completeBtn);
+        actions.appendChild(deleteBtn);
+        listItem.appendChild(actions);
+
+        taskList.appendChild(listItem);
+    });
+
+    // checkAlarms(); // Removed as per latest specification
+}
+\end{verbatim}
+
+\subsection{Toggle Complete Function}
+\begin{verbatim}
+function toggleComplete(index) {
+    tasks[index].completed = !tasks[index].completed;
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    renderTasks();
+}
+\end{verbatim}
+
+\subsection{Delete Task Function}
+\begin{verbatim}
+function deleteTask(index) {
+    tasks.splice(index, 1);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    renderTasks();
+}
+\end{verbatim}
+
+\subsection{Initialization}
+\begin{verbatim}
+// Load tasks on page load
+renderTasks();
+
+// Load tasks on page load
+renderTasks();
+\end{verbatim}
+
+\section{Key Implementation Techniques}
+
+\subsection{DOM Manipulation}
+Dynamic content generation using createElement(), appendChild(), and innerHTML for rendering tasks.
+
+\subsection{Event Handling}
+Inline onclick handlers assigned dynamically for Complete and Delete buttons.
+
+\subsection{Data Persistence}
+localStorage API used for saving (JSON.stringify) and loading (JSON.parse) tasks.
+
+\subsection{Array Manipulation}
+Array methods: push() for adding, splice() for deleting, sort() for ordering, forEach() for iteration.
+
+\subsection{Date Handling}
+JavaScript Date object for parsing, comparing, and formatting dates/times.
+
+\section{Implementation Challenges and Solutions}
+
+\subsection{Optional Date/Time Fields}
+\textbf{Challenge:} Handle tasks with and without due dates.
+
+\textbf{Solution:} Check if both date and time are provided before creating dateTime string; treat null as Infinity in sorting.
+
+\subsection{Task Sorting Logic}
+\textbf{Challenge:} Sort by multiple criteria (completion status, then date).
+
+\textbf{Solution:} Custom comparator function handling both criteria and null values.
+
+\section{Code Quality Practices}
+\begin{itemize}
+\item Consistent camelCase naming conventions
+\item Modular function design (single responsibility)
+\item Clear, descriptive variable and function names
+\item Separation of concerns (HTML/CSS/JS in separate files)
+\item Comments for complex logic
+\end{itemize}
+
+\section{Conclusion}
+This chapter detailed the implementation of My Task Manager using vanilla web technologies. The code demonstrates effective use of JavaScript for DOM manipulation, event handling, data persistence, and algorithm implementation.

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Clock, Download, FileText, Search, Share2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../utils/supabaseClient';
+import API_BASE_URL from '../apiConfig';
 
 const DashboardPage = () => {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const DashboardPage = () => {
 
     // 2. Fallback to Local API
     try {
-        const res = await fetch('http://localhost:8000/history');
+        const res = await fetch(`${API_BASE_URL}/history`);
         if (res.ok) {
             const localData = await res.json();
             setHistory(localData);

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FileUploader from '../components/FileUploader';
 import { Loader2, ArrowRight } from 'lucide-react';
+import API_BASE_URL from '../apiConfig';
 
 const UploadPage = () => {
   const [file, setFile] = useState(null);
@@ -25,7 +26,7 @@ const UploadPage = () => {
     formData.append('translate_dir', 'auto');
 
     try {
-      const response = await fetch('http://localhost:8000/translate', {
+      const response = await fetch(`${API_BASE_URL}/translate`, {
         method: 'POST',
         body: formData,
       });
@@ -53,7 +54,7 @@ const UploadPage = () => {
     let p = 0;
     const interval = setInterval(async () => {
         try {
-            const res = await fetch(`http://localhost:8000/status/${jobId}`);
+            const res = await fetch(`${API_BASE_URL}/status/${jobId}`);
             if (res.ok) {
                 const job = await res.json();
                 if (job.status === 'done') {
