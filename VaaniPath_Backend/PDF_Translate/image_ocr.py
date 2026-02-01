@@ -1,24 +1,23 @@
-import asyncio
-import nest_asyncio
 import re
-from .constants import _TR
-
-nest_asyncio.apply()
+from deep_translator import GoogleTranslator
 
 def translate_text(text: str, src_lang: str, dest_lang: str) -> str:
     if not text.strip():
         return ""
     try:
-        # Use the global translator from constants
-        res = _TR.translate(text, src=src_lang, dest=dest_lang)
+        # Initializing Translator per call is fine for deep-translator
+        # It doesn't have the same overhead/connection issues as googletrans
         
-        # Handle async objects if returned (depends on googletrans version)
-        if asyncio.iscoroutine(res):
-            loop = asyncio.get_event_loop()
-            res = loop.run_until_complete(res)
+        # map 'hi' to 'hindi' or use 'auto'
+        s = 'auto' if src_lang == 'auto' else src_lang
+        d = dest_lang
+        
+        translator = GoogleTranslator(source=s, target=d)
+        out = translator.translate(text)
+        
+        if not out:
+            return text
             
-        out = getattr(res, "text", text)
-        
         # Cleanup
         out = "\n".join(" ".join(line.split()) for line in out.splitlines())
         out = re.sub(r"\s+([,.;:!?\u0964])", r"\1", out)
